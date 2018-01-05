@@ -9,9 +9,7 @@ module.exports =
 class TabBarView
   constructor: (@pane, @location) ->
     @element = document.createElement('ul')
-    @element.classList.add("list-inline")
     @element.classList.add("tab-bar")
-    @element.classList.add("inset-panel")
     @element.setAttribute('is', 'atom-tabs')
     @element.setAttribute("tabindex", -1)
     @element.setAttribute("location", @location)

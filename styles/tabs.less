@@ -1,36 +1,59 @@
-@import "ui-variables";
 @import "octicon-mixins";
-
-@close-icon-size: 12px;
 
 .tab-bar {
   display: flex;
-  -webkit-user-select: none;
+  position: relative;
   margin: 0;
+  padding-left: 0;
+  height: var(--bar-height);
+  line-height: var(--bar-height);
+  list-style: none;
+  box-shadow: inset 0 -1px 0 var(--border-color);
+  background-color: var(--bg-below);
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-user-select: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &:empty {
+    display: none;
+  }
 
   .tab {
-    font-size: 11px;
     position: relative;
-    padding-left: 10px;
-    padding-right: 10px + @close-icon-size + 2px;
-    -webkit-user-drag: element;
     flex: 1;
     max-width: 175px;
     min-width: 40px;
+    color: var(--fg-subtle);
+    box-shadow: inherit;
+    border-left: var(--border);
     transition: max-width .25s ease-in-out;
+    -webkit-user-drag: element;
 
     &.active {
-      flex: 2;
-      width: -webkit-fit-content;
+      color: var(--fg);
+      background-color: var(--bg);
+      box-shadow: none;
+    }
 
-      .title {
-        padding-right: 10px;
-      }
+    &:first-of-type {
+      border-left-color: transparent;
+    }
+    &:last-of-type {
+      // use box-shadow to not take up any space
+      box-shadow: inset 0 -1px 0 var(--border-color), 1px 0 0 var(--border-color);
+    }
+    &.active:last-of-type {
+      box-shadow: 1px 0 0 var(--border-color);
     }
 
     .title {
       overflow: hidden;
       white-space: pre;
+      text-align: center;
       text-overflow: ellipsis;
       &.temp {
         font-style: italic;
@@ -43,37 +66,84 @@
       }
     }
 
+    // Close icon ----------------------
+
     .close-icon {
-      .octicon(x, @close-icon-size);
+      --size: calc(var(--bar-height) ~'-' var(--spacer-2));
+
+      .octicon(x, 16px);
       position: absolute;
-      top: 1px;
-      right: 10px;
+      z-index: 2;
+      top: var(--spacer-1);
+      right: var(--spacer-1);
+      width: var(--size);
+      height: var(--size);
+      line-height: var(--size);
+      text-align: center;
+      border-radius: var(--border-radius);
+      background-color: inherit;
+      overflow: hidden;
+      transform: scale(0);
+      transition: transform .08s;
       cursor: default;
+      &:hover {
+        color: var(--accent-fg);
+        background-color: var(--accent);
+      }
+      &:active {
+        background-color: var(--bg-below);
+      }
+      &::before {
+        z-index: 1;
+        font-size: calc(var(--bar-height) ~'-' var(--spacer-3));
+        width: auto;
+        height: auto;
+        pointer-events: none;
+      }
+    }
+    &:hover .close-icon {
+      transform: scale(1);
+      transition-duration: .16s;
     }
 
-    &.modified:hover .close-icon {
-      color: @background-color-info;
-    }
 
-    &.modified:not(:hover) .close-icon {
-      &:before { display: none; }
-      top: 11px;
-      right: 11px;
-      width: 8px;
-      height: 8px;
-      border: 2px solid @background-color-info;
-      border-radius: 12px;
+    // Modified icon ----------------------
+
+    &.modified {
+      &:hover .close-icon {
+        color: var(--accent);
+        &:hover {
+          color: var(--accent-fg);
+        }
+      }
+      &:not(:hover) .close-icon {
+        color: var(--accent);
+        transform: scale(1);
+        &::before {
+          content: "\f052";
+        }
+      }
     }
   }
 
   /* Drag and Drop */
+
+  .tab.is-dragging {
+    opacity: .5;
+
+    .close-icon,
+    &:before {
+      visibility: hidden;
+    }
+  }
+
   .placeholder {
     position: relative;
     top: 0;
     padding: 0;
-    height: @tab-height;
     z-index: 999;
     list-style: none;
+    height: inherit;
     background: @background-color-info;
     pointer-events: none;
 
@@ -81,29 +151,49 @@
     &:before {
       content: "";
       position: absolute;
+      z-index: 1;
+      margin: 0;
       width: 2px;
-      margin: -1px; padding: 0;
       height: inherit;
-      background: inherit;
+      background-color: var(--accent);
     }
 
-    // dot
+    // arrow
     &:after {
       content: "";
       position: absolute;
-      top: @tab-height;
-      margin-top: -1px;
-      margin-left: -2px;
-      z-index: 9999;
+      z-index: 0;
+      top: calc(var(--bar-height) ~'/' 2);
+      margin: -4px 0 0 -3px;
       width: 4px;
       height: 4px;
       background: inherit;
-      border-radius: 4px;
-      border: 1px solid transparent;
+      border: 4px solid var(--accent);
+      transform: rotate(45deg);
+      background: transparent;
+    }
+
+    &:last-child {
+      &:before {
+        margin-left: -2px;
+      }
+      &:after {
+        transform: none;
+        margin-left: -10px;
+        border-color: transparent var(--accent) transparent transparent;
+      }
     }
   }
 
   &.hidden {
     display: none;
+  }
+
+  // Tabs in the docks ----------------------
+
+  atom-dock & {
+    .tab.active {
+      background-color: var(--bg-below);
+    }
   }
 }
