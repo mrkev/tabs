@@ -9,7 +9,7 @@
   line-height: var(--bar-height);
   list-style: none;
   box-shadow: inset 0 -1px 0 var(--border-color);
-  background-color: var(--bg-below);
+  background-color: var(--app-bg);
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-user-select: none;
@@ -34,7 +34,7 @@
     -webkit-user-drag: element;
 
     &.active {
-      color: var(--fg);
+      color: var(--fg-strong);
       background-color: var(--bg);
       box-shadow: none;
     }
@@ -91,7 +91,7 @@
         background-color: var(--accent);
       }
       &:active {
-        background-color: var(--bg-below);
+        background-color: var(--bg);
       }
       &::before {
         z-index: 1;
@@ -193,7 +193,7 @@
 
   atom-dock & {
     .tab.active {
-      background-color: var(--bg-below);
+      background-color: var(--bg);
     }
   }
 }
