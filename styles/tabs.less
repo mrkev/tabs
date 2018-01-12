@@ -1,13 +1,10 @@
 @import "octicon-mixins";
 
-.tab-bar {
-  display: flex;
+.tabs {
   position: relative;
-  margin: 0;
-  padding-left: 0;
+  display: flex;
   height: var(--bar-height);
   line-height: var(--bar-height);
-  list-style: none;
   box-shadow: inset 0 -1px 0 var(--border);
   background-color: var(--app-bg);
   overflow-x: auto;
@@ -22,12 +19,13 @@
     display: none;
   }
 
-  .tab {
+  &-Tab {
     position: relative;
     flex: 1;
     max-width: 175px;
     min-width: 40px;
     color: var(--fg-subtle);
+    text-align: center;
     box-shadow: inherit;
     border-left: 1px solid var(--border);
     transition: max-width .25s ease-in-out;
@@ -50,7 +48,7 @@
       box-shadow: 1px 0 0 var(--border);
     }
 
-    .title {
+    &-title {
       overflow: hidden;
       white-space: pre;
       text-align: center;
@@ -60,6 +58,7 @@
       }
     }
 
+    // Setting to hide the icons
     .hide-icon {
       &.icon:before {
         display: none;
@@ -68,7 +67,7 @@
 
     // Close icon ----------------------
 
-    .close-icon {
+    &-closeIcon {
       --size: calc(var(--bar-height) ~'-' var(--spacer-2));
 
       .octicon(x, 16px);

@@ -8,8 +8,8 @@ TabView = require './tab-view'
 module.exports =
 class TabBarView
   constructor: (@pane, @location) ->
-    @element = document.createElement('ul')
-    @element.classList.add("tab-bar")
+    @element = document.createElement('tabs')
+    @element.classList.add("tabs")
     @element.setAttribute('is', 'atom-tabs')
     @element.setAttribute("tabindex", -1)
     @element.setAttribute("location", @location)

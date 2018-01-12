@@ -18,8 +18,8 @@ describe('icon services', () => {
     waitsForPromise(() => atom.packages.activatePackage('tabs'))
 
     runs(() => {
-      tab = atom.workspace.getElement().querySelector('.tab')
-      expect(tab.itemTitle.className).toBe('title')
+      tab = atom.workspace.getElement().querySelector('.tabs-Tab')
+      expect(tab.itemTitle.className).toBe('tabs-Tab-title')
     })
   })
 
@@ -46,20 +46,20 @@ describe('icon services', () => {
       const provider = {iconClassForPath: () => 'foo bar'}
       const disposable = atom.packages.serviceHub.provide('atom.file-icons', '1.0.0', provider)
       expect(iconServices.fileIcons).toBe(provider)
-      expect(tab.itemTitle.className).toBe('title icon foo bar')
+      expect(tab.itemTitle.className).toBe('tabs-Tab-title icon foo bar')
       disposable.dispose()
       expect(iconServices.fileIcons).toBe(DefaultFileIcons)
-      expect(tab.itemTitle.className).toBe('title')
+      expect(tab.itemTitle.className).toBe('tabs-Tab-title')
     })
 
     it('accepts an array of strings as icon-classes', () => {
       const provider = {iconClassForPath: () => ['foo', 'bar']}
       const disposable = atom.packages.serviceHub.provide('atom.file-icons', '1.0.0', provider)
       expect(iconServices.fileIcons).toBe(provider)
-      expect(tab.itemTitle.className).toBe('title icon foo bar')
+      expect(tab.itemTitle.className).toBe('tabs-Tab-title icon foo bar')
       disposable.dispose()
       expect(iconServices.fileIcons).toBe(DefaultFileIcons)
-      expect(tab.itemTitle.className).toBe('title')
+      expect(tab.itemTitle.className).toBe('tabs-Tab-title')
     })
   })
 
@@ -77,7 +77,7 @@ describe('icon services', () => {
       }
       const disposable = atom.packages.serviceHub.provide('file-icons.element-icons', '1.0.0', provider)
       expect(iconServices.elementIcons).toBe(provider)
-      expect(tab.itemTitle.className).toBe('title icon foo bar')
+      expect(tab.itemTitle.className).toBe('tabs-Tab-title icon foo bar')
       disposable.dispose()
       expect(iconServices.elementIcons).toBe(null)
     })
@@ -96,7 +96,7 @@ describe('icon services', () => {
       atom.packages.serviceHub.provide('file-icons.element-icons', '1.0.0', elementProvider)
       expect(iconServices.fileIcons).toBe(basicProvider)
       expect(iconServices.elementIcons).toBe(elementProvider)
-      expect(tab.itemTitle.className).toBe('title icon bar')
+      expect(tab.itemTitle.className).toBe('tabs-Tab-title icon bar')
     })
   })
 })

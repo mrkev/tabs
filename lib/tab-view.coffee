@@ -10,19 +10,19 @@ class TabView
     if typeof @item.getPath is 'function'
       @path = @item.getPath()
 
-    @element = document.createElement('li')
+    @element = document.createElement('div')
     @element.setAttribute('is', 'tabs-tab')
+    @element.classList.add('tabs-Tab', 'sortable')
     if ['TextEditor', 'TestView'].indexOf(@item.constructor.name) > -1
       @element.classList.add('texteditor')
-    @element.classList.add('tab', 'sortable')
 
-    @itemTitle = document.createElement('div')
-    @itemTitle.classList.add('title')
+    @itemTitle = document.createElement('span')
+    @itemTitle.classList.add('tabs-Tab-title')
     @element.appendChild(@itemTitle)
 
     if location is 'center' or not @item.isPermanentDockItem?()
-      closeIcon = document.createElement('div')
-      closeIcon.classList.add('close-icon')
+      closeIcon = document.createElement('span')
+      closeIcon.classList.add('tabs-Tab-closeIcon')
       closeIcon.onclick = didClickCloseIcon
       @element.appendChild(closeIcon)
 
