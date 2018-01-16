@@ -82,15 +82,15 @@
       height: var(--size);
       line-height: var(--size);
       text-align: center;
-      border-radius: var(--border-radius);
       background-color: inherit;
+      border-radius: var(--border-radius);
       overflow: hidden;
       transform: scale(0);
       transition: transform .08s;
       cursor: default;
       &:hover {
-        color: var(--accent-fg);
-        background-color: var(--accent);
+        color: var(--state-fg);
+        background-color: var(--accent-bg);
       }
       &:active {
         background-color: var(--bg);
@@ -103,23 +103,23 @@
         pointer-events: none;
       }
     }
-    &:hover .close-icon {
+
+    &:hover .tabs-Tab-closeIcon {
       transform: scale(1);
       transition-duration: .16s;
     }
 
-
     // Modified icon ----------------------
 
     &.modified {
-      &:hover .close-icon {
-        color: var(--accent);
+      &:hover .tabs-Tab-closeIcon {
+        color: var(--accent-fg);
         &:hover {
-          color: var(--accent-fg);
+          color: var(--state-fg);
         }
       }
-      &:not(:hover) .close-icon {
-        color: var(--accent);
+      &:not(:hover) .tabs-Tab-closeIcon {
+        color: var(--accent-fg);
         transform: scale(1);
         &::before {
           content: "\f052";
@@ -130,23 +130,22 @@
 
   /* Drag and Drop */
 
-  .tab.is-dragging {
+  &-Tab.is-dragging {
     opacity: .5;
 
-    .close-icon,
+    .tabs-Tab-closeIcon,
     &:before {
       visibility: hidden;
     }
   }
 
-  .placeholder {
+  &-Placeholder {
     position: relative;
     top: 0;
     padding: 0;
     z-index: 999;
     list-style: none;
     height: inherit;
-    background: @background-color-info;
     pointer-events: none;
 
     // bar
@@ -157,7 +156,7 @@
       margin: 0;
       width: 2px;
       height: inherit;
-      background-color: var(--accent);
+      background-color: var(--accent-fg);
     }
 
     // arrow
@@ -170,7 +169,7 @@
       width: 4px;
       height: 4px;
       background: inherit;
-      border: 4px solid var(--accent);
+      border: 4px solid var(--accent-fg);
       transform: rotate(45deg);
       background: transparent;
     }
@@ -182,7 +181,7 @@
       &:after {
         transform: none;
         margin-left: -10px;
-        border-color: transparent var(--accent) transparent transparent;
+        border-color: transparent var(--accent-fg) transparent transparent;
       }
     }
   }
@@ -191,11 +190,4 @@
     display: none;
   }
 
-  // Tabs in the docks ----------------------
-
-  atom-dock & {
-    .tab.active {
-      background-color: var(--bg);
-    }
-  }
 }

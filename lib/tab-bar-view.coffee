@@ -494,7 +494,7 @@ class TabBarView
     return @placeholderEl if @placeholderEl?
 
     @placeholderEl = document.createElement("li")
-    @placeholderEl.classList.add("placeholder")
+    @placeholderEl.classList.add("tabs-Placeholder")
     @placeholderEl
 
   removePlaceholder: ->
@@ -502,7 +502,7 @@ class TabBarView
     @placeholderEl = null
 
   isPlaceholder: (element) ->
-    element.classList.contains('placeholder')
+    element.classList.contains('tabs-Placeholder')
 
   onMouseEnter: ->
     for tab in @getTabs()
