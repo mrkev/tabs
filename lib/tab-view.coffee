@@ -10,7 +10,7 @@ class TabView
     if typeof @item.getPath is 'function'
       @path = @item.getPath()
 
-    @element = document.createElement('div')
+    @element = document.createElement('li')
     @element.setAttribute('is', 'tabs-tab')
     @element.classList.add('tabs-Tab', 'sortable')
     if ['TextEditor', 'TestView'].indexOf(@item.constructor.name) > -1
