@@ -8,7 +8,7 @@ menu: [
 ]
 
 'context-menu':
-  '.tab': [
+  '.tabs-Tab': [
     {label: 'Close Tab', command: 'tabs:close-tab'}
     {label: 'Close Other Tabs', command: 'tabs:close-other-tabs'}
     {label: 'Close Tabs to the Right', command: 'tabs:close-tabs-to-right'}
@@ -24,14 +24,14 @@ menu: [
     {label: 'Split Right', command: 'tabs:split-right'}
 
   ]
-  '.tab.texteditor': [
+  '.tabs-Tab.is-texteditor': [
     {type: 'separator'}
     {label: 'Open In New Window', command: 'tabs:open-in-new-window'}
     {type: 'separator'}
   ]
-  '.tab.pending-tab': [
+  '.tabs-Tab.is-pending': [
     {label: 'Keep Pending Tab', command: 'tabs:keep-pending-tab'}
   ]
-  '.tab-bar': [
+  '.tabs': [
     {label: 'Reopen Closed Tab', command: 'pane:reopen-closed-item'}
   ]
