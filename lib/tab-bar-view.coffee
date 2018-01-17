@@ -398,9 +398,9 @@ class TabBarView
     return unless tab
 
     if event.which is 3 or (event.which is 1 and event.ctrlKey is true)
-      @rightClickedTab?.element.classList.remove('right-clicked')
+      @rightClickedTab?.element.classList.remove('is-rightClicked')
       @rightClickedTab = tab
-      @rightClickedTab.element.classList.add('right-clicked')
+      @rightClickedTab.element.classList.add('is-rightClicked')
       event.preventDefault()
     else if event.which is 2
       # This prevents Chromium from activating "scroll mode" when
