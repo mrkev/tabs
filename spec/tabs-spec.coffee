@@ -1055,11 +1055,11 @@ describe "TabBarView", ->
 
           [dragStartEvent, dropEvent] = buildDragEvents(tabBar.tabAtIndex(0).element, tabBar2.element)
           tabBar.onDragStart(dragStartEvent)
-          expect(tabBar2.element.querySelector('.placeholder')).toBeNull()
+          expect(tabBar2.element.querySelector('.tabs-Placeholder')).toBeNull()
           tabBar2.onDragOver(dropEvent)
-          expect(tabBar2.element.querySelector('.placeholder')).not.toBeNull()
+          expect(tabBar2.element.querySelector('.tabs-Placeholder')).not.toBeNull()
           tabBar2.onDrop(dropEvent)
-          expect(tabBar2.element.querySelector('.placeholder')).toBeNull()
+          expect(tabBar2.element.querySelector('.tabs-Placeholder')).toBeNull()
 
           expect(tabBar.getTabs().map (tab) -> tab.element.textContent).toEqual ["sample.js", "Item 2"]
           expect(pane.getItems()).toEqual [editor1, item2]
@@ -1074,22 +1074,22 @@ describe "TabBarView", ->
           item1.getAllowedLocations = -> ['center', 'bottom']
           [dragStartEvent, dropEvent] = buildDragEvents(tabBar.tabAtIndex(0).element, tabBar2.element)
           tabBar.onDragStart(dragStartEvent)
-          expect(tabBar2.element.querySelector('.placeholder')).toBeNull()
+          expect(tabBar2.element.querySelector('.tabs-Placeholder')).toBeNull()
           tabBar2.onDragOver(dropEvent)
-          expect(tabBar2.element.querySelector('.placeholder')).toBeNull()
+          expect(tabBar2.element.querySelector('.tabs-Placeholder')).toBeNull()
           tabBar2.onDrop(dropEvent)
-          expect(tabBar2.element.querySelector('.placeholder')).toBeNull()
+          expect(tabBar2.element.querySelector('.tabs-Placeholder')).toBeNull()
           expect(pane.getItems()).toEqual [item1, editor1, item2]
           expect(pane2.getItems()).toEqual [dockItem]
 
           item1.getAllowedLocations = -> ['left']
           [dragStartEvent, dropEvent] = buildDragEvents(tabBar.tabAtIndex(0).element, tabBar2.element)
           tabBar.onDragStart(dragStartEvent)
-          expect(tabBar2.element.querySelector('.placeholder')).toBeNull()
+          expect(tabBar2.element.querySelector('.tabs-Placeholder')).toBeNull()
           tabBar2.onDragOver(dropEvent)
-          expect(tabBar2.element.querySelector('.placeholder')).not.toBeNull()
+          expect(tabBar2.element.querySelector('.tabs-Placeholder')).not.toBeNull()
           tabBar2.onDrop(dropEvent)
-          expect(tabBar2.element.querySelector('.placeholder')).toBeNull()
+          expect(tabBar2.element.querySelector('.tabs-Placeholder')).toBeNull()
           expect(pane.getItems()).toEqual [editor1, item2]
           expect(pane2.getItems()).toEqual [dockItem, item1]
 
