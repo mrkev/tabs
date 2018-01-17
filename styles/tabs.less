@@ -63,7 +63,7 @@
     }
   }
 
-  
+
   // Title ----------------------
 
   &-Title {
@@ -97,6 +97,7 @@
     .octicon(x, 16px);
     position: absolute;
     z-index: 2;
+    padding: 0;
     top: var(--spacer-1);
     right: var(--spacer-1);
     width: var(--size);
@@ -105,6 +106,7 @@
     text-align: center;
     background-color: var(--bg);
     border-radius: var(--border-radius);
+    border: none;
     overflow: hidden;
     transform: scale(0);
     transition: transform .08s;
@@ -121,6 +123,7 @@
       font-size: calc(var(--bar-height) ~'-' var(--spacer-3));
       width: auto;
       height: auto;
+      vertical-align: -2px; // TODO: Make dynamic
       pointer-events: none;
     }
   }

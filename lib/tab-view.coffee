@@ -21,7 +21,7 @@ class TabView
     @element.appendChild(@itemTitle)
 
     if location is 'center' or not @item.isPermanentDockItem?()
-      closeIcon = document.createElement('div')
+      closeIcon = document.createElement('button')
       closeIcon.classList.add('tabs-CloseButton')
       closeIcon.onclick = didClickCloseIcon
       @element.appendChild(closeIcon)
