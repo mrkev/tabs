@@ -147,9 +147,9 @@ class TabBarView
 
   updateTabBarVisibility: ->
     if not atom.config.get('tabs.alwaysShowTabBar') and not @shouldAllowDrag()
-      @element.classList.add('hidden')
+      @element.classList.add('is-hidden')
     else
-      @element.classList.remove('hidden')
+      @element.classList.remove('is-hidden')
 
   getTabs: ->
     @tabs.slice()

@@ -1166,7 +1166,7 @@ describe "TabBarView", ->
     describe "when 2 tabs are open", ->
       it "shows the tab bar", ->
         expect(pane.getItems().length).toBe 3
-        expect(tabBar).not.toHaveClass 'hidden'
+        expect(tabBar).not.toHaveClass 'is-hidden'
 
     describe "when 1 tab is open", ->
       it "shows the tab bar", ->
@@ -1174,7 +1174,7 @@ describe "TabBarView", ->
         pane.destroyItem(item1)
         pane.destroyItem(item2)
         expect(pane.getItems().length).toBe 1
-        expect(tabBar).not.toHaveClass 'hidden'
+        expect(tabBar).not.toHaveClass 'is-hidden'
 
   describe "when alwaysShowTabBar is false in package settings", ->
     beforeEach ->
@@ -1183,7 +1183,7 @@ describe "TabBarView", ->
     describe "when 2 tabs are open", ->
       it "shows the tab bar", ->
         expect(pane.getItems().length).toBe 3
-        expect(tabBar).not.toHaveClass 'hidden'
+        expect(tabBar).not.toHaveClass 'is-hidden'
 
     describe "when 1 tab is open", ->
       it "hides the tab bar", ->
@@ -1191,7 +1191,7 @@ describe "TabBarView", ->
         pane.destroyItem(item1)
         pane.destroyItem(item2)
         expect(pane.getItems().length).toBe 1
-        expect(tabBar.element).toHaveClass 'hidden'
+        expect(tabBar.element).toHaveClass 'is-hidden'
 
   if atom.workspace.buildTextEditor().isPending? or atom.workspace.getActivePane().getActiveItem?
     isPending = (item) ->
