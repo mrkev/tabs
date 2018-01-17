@@ -12,7 +12,7 @@ class TabView
 
     @element = document.createElement('li')
     @element.setAttribute('is', 'tabs-tab')
-    @element.classList.add('tabs-Tab', 'sortable')
+    @element.classList.add('tabs-Tab')
     if ['TextEditor', 'TestView'].indexOf(@item.constructor.name) > -1
       @element.classList.add('texteditor')
 
