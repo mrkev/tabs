@@ -27,7 +27,7 @@
     flex: 1;
     max-width: 175px;
     min-width: 40px;
-    color: var(--fg-subtle);
+    color: var(--app-fg-subtle);
     text-align: center;
     box-shadow: inherit;
     border-left: 1px solid var(--border);
@@ -51,10 +51,16 @@
       box-shadow: 1px 0 0 var(--border);
     }
 
+
+    // Title ----------------------
+
     &-title {
+      display: block;
+      padding-left: var(--spacer-1);
+      padding-right: var(--spacer-1);
+      text-align: center;
       overflow: hidden;
       white-space: pre;
-      text-align: center;
       text-overflow: ellipsis;
       
       // When tab is pending
@@ -86,7 +92,7 @@
       height: var(--size);
       line-height: var(--size);
       text-align: center;
-      background-color: inherit;
+      background-color: var(--bg);
       border-radius: var(--border-radius);
       overflow: hidden;
       transform: scale(0);
