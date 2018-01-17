@@ -11,10 +11,10 @@ class TabView
       @path = @item.getPath()
 
     @element = document.createElement('li')
-    @element.setAttribute('is', 'tabs-tab')
     @element.classList.add('tabs-Tab')
     if ['TextEditor', 'TestView'].indexOf(@item.constructor.name) > -1
       @element.classList.add('is-texteditor')
+    @element.setAttribute('is', 'tabs-tab')
 
     @itemTitle = document.createElement('div')
     @itemTitle.classList.add('tabs-Title')
