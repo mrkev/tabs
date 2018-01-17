@@ -451,7 +451,7 @@ describe "TabBarView", ->
           tabBar.tabForItem(item1).updateIconVisibility.reset()
 
       it "doesn't hide the icon", ->
-        expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Tab-title')).not.toHaveClass "hide-icon"
+        expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Tab-title')).not.toHaveClass "has-hiddenIcon"
 
       it "hides the icon from the tab when showIcon is changed to false", ->
         atom.config.set("tabs.showIcons", false)
@@ -460,7 +460,7 @@ describe "TabBarView", ->
           tabBar.tabForItem(item1).updateIconVisibility.callCount > 0
 
         runs ->
-          expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Tab-title')).toHaveClass "hide-icon"
+          expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Tab-title')).toHaveClass "has-hiddenIcon"
 
     describe "when showIcon is set to false in package settings", ->
       beforeEach ->
@@ -475,7 +475,7 @@ describe "TabBarView", ->
           tabBar.tabForItem(item1).updateIconVisibility.reset()
 
       it "hides the icon", ->
-        expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Tab-title')).toHaveClass "hide-icon"
+        expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Tab-title')).toHaveClass "has-hiddenIcon"
 
       it "shows the icon on the tab when showIcon is changed to true", ->
         atom.config.set("tabs.showIcons", true)
@@ -483,7 +483,7 @@ describe "TabBarView", ->
         waitsFor ->
           tabBar.tabForItem(item1).updateIconVisibility.callCount > 0
 
-        expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Tab-title')).not.toHaveClass "hide-icon"
+        expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Tab-title')).not.toHaveClass "has-hiddenIcon"
 
   describe "when the item doesn't have an icon defined", ->
     it "doesn't display an icon on the tab", ->

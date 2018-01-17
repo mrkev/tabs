@@ -240,9 +240,9 @@ class TabView
 
   updateIconVisibility: ->
     if atom.config.get 'tabs.showIcons'
-      @itemTitle.classList.remove('hide-icon')
+      @itemTitle.classList.remove('has-hiddenIcon')
     else
-      @itemTitle.classList.add('hide-icon')
+      @itemTitle.classList.add('has-hiddenIcon')
 
   updateModifiedStatus: ->
     if @item.isModified?()

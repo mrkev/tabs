@@ -59,14 +59,16 @@
       &.temp {
         font-style: italic;
       }
-    }
 
-    // Setting to hide the icons
-    .hide-icon {
-      &.icon:before {
-        display: none;
+      // When "Show Icons" is disabled in the settings
+      &.has-hiddenIcon {
+        &.icon:before {
+          display: none;
+        }
       }
     }
+
+    
 
     // Close icon ----------------------
 
