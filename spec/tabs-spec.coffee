@@ -138,19 +138,19 @@ describe "TabBarView", ->
       expect(pane.getItems().length).toBe 3
       expect(tabBar.element.querySelectorAll('.tabs-Tab').length).toBe 3
 
-      expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Tab-title').textContent).toBe item1.getTitle()
-      expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Tab-title').dataset.name).toBeUndefined()
-      expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Tab-title').dataset.path).toBeUndefined()
+      expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Title').textContent).toBe item1.getTitle()
+      expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Title').dataset.name).toBeUndefined()
+      expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Title').dataset.path).toBeUndefined()
       expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].dataset.type).toBe('TestView')
 
-      expect(tabBar.element.querySelectorAll('.tabs-Tab')[1].querySelector('.tabs-Tab-title').textContent).toBe editor1.getTitle()
-      expect(tabBar.element.querySelectorAll('.tabs-Tab')[1].querySelector('.tabs-Tab-title').dataset.name).toBe(path.basename(editor1.getPath()))
-      expect(tabBar.element.querySelectorAll('.tabs-Tab')[1].querySelector('.tabs-Tab-title').dataset.path).toBe(editor1.getPath())
+      expect(tabBar.element.querySelectorAll('.tabs-Tab')[1].querySelector('.tabs-Title').textContent).toBe editor1.getTitle()
+      expect(tabBar.element.querySelectorAll('.tabs-Tab')[1].querySelector('.tabs-Title').dataset.name).toBe(path.basename(editor1.getPath()))
+      expect(tabBar.element.querySelectorAll('.tabs-Tab')[1].querySelector('.tabs-Title').dataset.path).toBe(editor1.getPath())
       expect(tabBar.element.querySelectorAll('.tabs-Tab')[1].dataset.type).toBe('TextEditor')
 
-      expect(tabBar.element.querySelectorAll('.tabs-Tab')[2].querySelector('.tabs-Tab-title').textContent).toBe item2.getTitle()
-      expect(tabBar.element.querySelectorAll('.tabs-Tab')[2].querySelector('.tabs-Tab-title').dataset.name).toBeUndefined()
-      expect(tabBar.element.querySelectorAll('.tabs-Tab')[2].querySelector('.tabs-Tab-title').dataset.path).toBeUndefined()
+      expect(tabBar.element.querySelectorAll('.tabs-Tab')[2].querySelector('.tabs-Title').textContent).toBe item2.getTitle()
+      expect(tabBar.element.querySelectorAll('.tabs-Tab')[2].querySelector('.tabs-Title').dataset.name).toBeUndefined()
+      expect(tabBar.element.querySelectorAll('.tabs-Tab')[2].querySelector('.tabs-Title').dataset.path).toBeUndefined()
       expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].dataset.type).toBe('TestView')
 
     it "highlights the tab for the active pane item", ->
@@ -220,7 +220,7 @@ describe "TabBarView", ->
         item3 = new TestView('Item 3')
         pane.activateItem(item3)
         expect(tabBar.element.querySelectorAll('.tabs-Tab').length).toBe 4
-        expect(tabBar.tabAtIndex(3).element.querySelector('.tabs-Tab-title').textContent).toMatch 'Item 3'
+        expect(tabBar.tabAtIndex(3).element.querySelector('.tabs-Title').textContent).toMatch 'Item 3'
 
       it "puts the new tab at the last index of the pane's items", ->
         atom.config.set("tabs.addNewTabsAtEnd", true)
@@ -237,7 +237,7 @@ describe "TabBarView", ->
         item3 = new TestView('Item 3')
         pane.activateItem(item3)
         expect(tabBar.element.querySelectorAll('.tabs-Tab').length).toBe 4
-        expect(tabBar.tabAtIndex(1).element.querySelector('.tabs-Tab-title').textContent).toMatch 'Item 3'
+        expect(tabBar.tabAtIndex(1).element.querySelector('.tabs-Title').textContent).toMatch 'Item 3'
 
   describe "when an item is removed from the pane", ->
     it "removes the item's tab from the tab bar", ->
@@ -306,7 +306,7 @@ describe "TabBarView", ->
     it "destroys the tab's item on the pane", ->
       jasmine.attachToDOM(tabBar.element) # Remove after Atom 1.2.0 is released
 
-      tabBar.tabForItem(editor1).element.querySelector('.tabs-Tab-closeIcon').click()
+      tabBar.tabForItem(editor1).element.querySelector('.tabs-CloseButton').click()
       expect(pane.getItems().length).toBe 2
       expect(pane.getItems().indexOf(editor1)).toBe -1
       expect(editor1.isDestroyed()).toBeTruthy()
@@ -390,9 +390,9 @@ describe "TabBarView", ->
       pane.activateItem(item4)
       pane.activateItem(item5)
       tabs = tabBar.element.querySelectorAll('.tabs-Tab')
-      expect(tabs[2].querySelector('.tabs-Tab-closeIcon')).not.toEqual(null)
-      expect(tabs[3].querySelector('.tabs-Tab-closeIcon')).not.toEqual(null)
-      expect(tabs[4].querySelector('.tabs-Tab-closeIcon')).not.toEqual(null)
+      expect(tabs[2].querySelector('.tabs-CloseButton')).not.toEqual(null)
+      expect(tabs[3].querySelector('.tabs-CloseButton')).not.toEqual(null)
+      expect(tabs[4].querySelector('.tabs-CloseButton')).not.toEqual(null)
 
     return unless atom.workspace.getRightDock?
     describe "in docks", ->
@@ -405,38 +405,38 @@ describe "TabBarView", ->
         expect(typeof item1.isPermanentDockItem).toBe('function')
         pane.activateItem(item1)
         tab = tabBar.element.querySelector('.tabs-Tab')
-        expect(tab.querySelector('.tabs-Tab-closeIcon')).toEqual(null)
+        expect(tab.querySelector('.tabs-CloseButton')).toEqual(null)
 
       it "is shown if the method returns false", ->
         item1 = new TestView('Item 1', undefined, "squirrel", "sample.js", false)
         expect(typeof item1.isPermanentDockItem).toBe('function')
         pane.activateItem(item1)
         tab = tabBar.element.querySelector('.tabs-Tab')
-        expect(tab.querySelector('.tabs-Tab-closeIcon')).not.toBeUndefined()
+        expect(tab.querySelector('.tabs-CloseButton')).not.toBeUndefined()
 
       it "is shown if the method doesn't exist", ->
         item1 = new TestView('Item 1', undefined, "squirrel", "sample.js")
         expect(item1.isPermanentDockItem).toBeUndefined()
         pane.activateItem(item1)
         tab = tabBar.element.querySelector('.tabs-Tab')
-        expect(tab.querySelector('.tabs-Tab-closeIcon')).not.toEqual(null)
+        expect(tab.querySelector('.tabs-CloseButton')).not.toEqual(null)
 
   describe "when an item has an icon defined", ->
     it "displays the icon on the tab", ->
-      expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Tab-title')).toHaveClass "icon"
-      expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Tab-title')).toHaveClass "icon-squirrel"
+      expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Title')).toHaveClass "icon"
+      expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Title')).toHaveClass "icon-squirrel"
 
     it "hides the icon from the tab if the icon is removed", ->
       item1.getIconName = null
       item1.emitIconChanged()
-      expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Tab-title')).not.toHaveClass "icon"
-      expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Tab-title')).not.toHaveClass "icon-squirrel"
+      expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Title')).not.toHaveClass "icon"
+      expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Title')).not.toHaveClass "icon-squirrel"
 
     it "updates the icon on the tab if the icon is changed", ->
       item1.getIconName = -> "zap"
       item1.emitIconChanged()
-      expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Tab-title')).toHaveClass "icon"
-      expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Tab-title')).toHaveClass "icon-zap"
+      expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Title')).toHaveClass "icon"
+      expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Title')).toHaveClass "icon-zap"
 
     describe "when showIcon is set to true in package settings", ->
       beforeEach ->
@@ -451,7 +451,7 @@ describe "TabBarView", ->
           tabBar.tabForItem(item1).updateIconVisibility.reset()
 
       it "doesn't hide the icon", ->
-        expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Tab-title')).not.toHaveClass "has-hiddenIcon"
+        expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Title')).not.toHaveClass "has-hiddenIcon"
 
       it "hides the icon from the tab when showIcon is changed to false", ->
         atom.config.set("tabs.showIcons", false)
@@ -460,7 +460,7 @@ describe "TabBarView", ->
           tabBar.tabForItem(item1).updateIconVisibility.callCount > 0
 
         runs ->
-          expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Tab-title')).toHaveClass "has-hiddenIcon"
+          expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Title')).toHaveClass "has-hiddenIcon"
 
     describe "when showIcon is set to false in package settings", ->
       beforeEach ->
@@ -475,7 +475,7 @@ describe "TabBarView", ->
           tabBar.tabForItem(item1).updateIconVisibility.reset()
 
       it "hides the icon", ->
-        expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Tab-title')).toHaveClass "has-hiddenIcon"
+        expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Title')).toHaveClass "has-hiddenIcon"
 
       it "shows the icon on the tab when showIcon is changed to true", ->
         atom.config.set("tabs.showIcons", true)
@@ -483,18 +483,18 @@ describe "TabBarView", ->
         waitsFor ->
           tabBar.tabForItem(item1).updateIconVisibility.callCount > 0
 
-        expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Tab-title')).not.toHaveClass "has-hiddenIcon"
+        expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Title')).not.toHaveClass "has-hiddenIcon"
 
   describe "when the item doesn't have an icon defined", ->
     it "doesn't display an icon on the tab", ->
-      expect(tabBar.element.querySelectorAll('.tabs-Tab')[2].querySelector('.tabs-Tab-title')).not.toHaveClass "icon"
-      expect(tabBar.element.querySelectorAll('.tabs-Tab')[2].querySelector('.tabs-Tab-title')).not.toHaveClass "icon-squirrel"
+      expect(tabBar.element.querySelectorAll('.tabs-Tab')[2].querySelector('.tabs-Title')).not.toHaveClass "icon"
+      expect(tabBar.element.querySelectorAll('.tabs-Tab')[2].querySelector('.tabs-Title')).not.toHaveClass "icon-squirrel"
 
     it "shows the icon on the tab if an icon is defined", ->
       item2.getIconName = -> "squirrel"
       item2.emitIconChanged()
-      expect(tabBar.element.querySelectorAll('.tabs-Tab')[2].querySelector('.tabs-Tab-title')).toHaveClass "icon"
-      expect(tabBar.element.querySelectorAll('.tabs-Tab')[2].querySelector('.tabs-Tab-title')).toHaveClass "icon-squirrel"
+      expect(tabBar.element.querySelectorAll('.tabs-Tab')[2].querySelector('.tabs-Title')).toHaveClass "icon"
+      expect(tabBar.element.querySelectorAll('.tabs-Tab')[2].querySelector('.tabs-Title')).toHaveClass "icon-squirrel"
 
   describe "when a tab item's modified status changes", ->
     it "adds or removes the 'is-modified' class to the tab based on the status", ->
@@ -916,8 +916,8 @@ describe "TabBarView", ->
 
       describe "when the dragged tab is the only one in the pane", ->
         it "does nothing", ->
-          tabBar.getTabs()[0].element.querySelector('.tabs-Tab-closeIcon').click()
-          tabBar.getTabs()[1].element.querySelector('.tabs-Tab-closeIcon').click()
+          tabBar.getTabs()[0].element.querySelector('.tabs-CloseButton').click()
+          tabBar.getTabs()[1].element.querySelector('.tabs-CloseButton').click()
           expect(tabBar.getTabs().map (tab) -> tab.element.textContent).toEqual ["sample.js"]
           tab = tabBar.tabAtIndex(0).element
           layout.test =
@@ -1213,7 +1213,7 @@ describe "TabBarView", ->
           runs ->
             pane.activateItem(editor1)
             expect(tabBar.element.querySelectorAll('.tabs-Tab .is-pending').length).toBe 1
-            expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Tab-title')).toHaveClass 'is-pending'
+            expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Title')).toHaveClass 'is-pending'
 
       describe "when tabs:keep-pending-tab is triggered on the pane", ->
         it "terminates pending state on the tab's item", ->
@@ -1241,7 +1241,7 @@ describe "TabBarView", ->
           runs ->
             expect(editor1.isDestroyed()).toBe true
             expect(tabBar.tabForItem(editor1)).toBeUndefined()
-            expect(tabBar.tabForItem(editor2).element.querySelector('.tabs-Tab-title')).toHaveClass 'is-pending'
+            expect(tabBar.tabForItem(editor2).element.querySelector('.tabs-Title')).toHaveClass 'is-pending'
 
         it "makes the tab permanent when double-clicking the tab", ->
           editor2 = null
@@ -1251,9 +1251,9 @@ describe "TabBarView", ->
 
           runs ->
             pane.activateItem(editor2)
-            expect(tabBar.tabForItem(editor2).element.querySelector('.tabs-Tab-title')).toHaveClass 'is-pending'
+            expect(tabBar.tabForItem(editor2).element.querySelector('.tabs-Title')).toHaveClass 'is-pending'
             triggerMouseEvent('dblclick', tabBar.tabForItem(editor2).element, which: 1)
-            expect(tabBar.tabForItem(editor2).element.querySelector('.tabs-Tab-title')).not.toHaveClass 'is-pending'
+            expect(tabBar.tabForItem(editor2).element.querySelector('.tabs-Title')).not.toHaveClass 'is-pending'
 
       describe "when editing a file in pending state", ->
         it "makes the item and tab permanent", ->
@@ -1266,7 +1266,7 @@ describe "TabBarView", ->
               advanceClock(editor1.buffer.stoppedChangingDelay)
 
           runs ->
-            expect(tabBar.tabForItem(editor1).element.querySelector('.tabs-Tab-title')).not.toHaveClass 'is-pending'
+            expect(tabBar.tabForItem(editor1).element.querySelector('.tabs-Title')).not.toHaveClass 'is-pending'
 
       describe "when saving a file", ->
         it "makes the tab permanent", ->
@@ -1278,7 +1278,7 @@ describe "TabBarView", ->
               editor1.save()
 
           runs ->
-            expect(tabBar.tabForItem(editor1).element.querySelector('.tabs-Tab-title')).not.toHaveClass 'is-pending'
+            expect(tabBar.tabForItem(editor1).element.querySelector('.tabs-Title')).not.toHaveClass 'is-pending'
 
       describe "when splitting a pending tab", ->
         editor1 = null
@@ -1292,11 +1292,11 @@ describe "TabBarView", ->
           tabBar2 = new TabBarView(pane2, 'center')
           newEditor = pane2.getActiveItem()
           expect(isPending(newEditor)).toBe false
-          expect(tabBar2.tabForItem(newEditor).element.querySelector('.tabs-Tab-title')).not.toHaveClass 'is-pending'
+          expect(tabBar2.tabForItem(newEditor).element.querySelector('.tabs-Title')).not.toHaveClass 'is-pending'
 
         it "keeps the pending tab in the old pane", ->
           expect(isPending(editor1)).toBe true
-          expect(tabBar.tabForItem(editor1).element.querySelector('.tabs-Tab-title')).toHaveClass 'is-pending'
+          expect(tabBar.tabForItem(editor1).element.querySelector('.tabs-Title')).toHaveClass 'is-pending'
 
       describe "when dragging a pending tab to a different pane", ->
         it "makes the tab permanent in the other pane", ->
@@ -1311,7 +1311,7 @@ describe "TabBarView", ->
             tabBar2 = new TabBarView(pane2, 'center')
             tabBar2.moveItemBetweenPanes(pane, 0, pane2, 1, editor1)
 
-            expect(tabBar2.tabForItem(pane2.getActiveItem()).element.querySelector('.tabs-Tab-title')).not.toHaveClass 'is-pending'
+            expect(tabBar2.tabForItem(pane2.getActiveItem()).element.querySelector('.tabs-Title')).not.toHaveClass 'is-pending'
 
   describe "integration with version control systems", ->
     [repository, tab, tab1] = []
@@ -1356,22 +1356,22 @@ describe "TabBarView", ->
       it "adds custom style for new items", ->
         repository.getCachedPathStatus.andReturn 'new'
         tab.updateVcsStatus(repository)
-        expect(tabBar.element.querySelectorAll('.tabs-Tab')[1].querySelector('.tabs-Tab-title')).toHaveClass "status-added"
+        expect(tabBar.element.querySelectorAll('.tabs-Tab')[1].querySelector('.tabs-Title')).toHaveClass "status-added"
 
       it "adds custom style for modified items", ->
         repository.getCachedPathStatus.andReturn 'modified'
         tab.updateVcsStatus(repository)
-        expect(tabBar.element.querySelectorAll('.tabs-Tab')[1].querySelector('.tabs-Tab-title')).toHaveClass "status-modified"
+        expect(tabBar.element.querySelectorAll('.tabs-Tab')[1].querySelector('.tabs-Title')).toHaveClass "status-modified"
 
       it "adds custom style for ignored items", ->
         repository.isPathIgnored.andReturn true
         tab.updateVcsStatus(repository)
-        expect(tabBar.element.querySelectorAll('.tabs-Tab')[1].querySelector('.tabs-Tab-title')).toHaveClass "status-ignored"
+        expect(tabBar.element.querySelectorAll('.tabs-Tab')[1].querySelector('.tabs-Title')).toHaveClass "status-ignored"
 
       it "does not add any styles for items not in the repository", ->
-        expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Tab-title')).not.toHaveClass "status-added"
-        expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Tab-title')).not.toHaveClass "status-modified"
-        expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Tab-title')).not.toHaveClass "status-ignored"
+        expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Title')).not.toHaveClass "status-added"
+        expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Title')).not.toHaveClass "status-modified"
+        expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Title')).not.toHaveClass "status-ignored"
 
     describe "when changes in item statuses are notified", ->
       it "updates status for items in the repository", ->
@@ -1381,9 +1381,9 @@ describe "TabBarView", ->
 
       it "updates the status of an item if it has changed", ->
         repository.getCachedPathStatus.reset()
-        expect(tabBar.element.querySelectorAll('.tabs-Tab')[1].querySelector('.tabs-Tab-title')).not.toHaveClass "status-modified"
+        expect(tabBar.element.querySelectorAll('.tabs-Tab')[1].querySelector('.tabs-Title')).not.toHaveClass "status-modified"
         repository.emitDidChangeStatus {path: tab.path, pathStatus: "modified"}
-        expect(tabBar.element.querySelectorAll('.tabs-Tab')[1].querySelector('.tabs-Tab-title')).toHaveClass "status-modified"
+        expect(tabBar.element.querySelectorAll('.tabs-Tab')[1].querySelector('.tabs-Title')).toHaveClass "status-modified"
         expect(repository.getCachedPathStatus.calls.length).toBe 0
 
       it "does not update status for items not in the repository", ->
@@ -1406,21 +1406,21 @@ describe "TabBarView", ->
       it "removes status from the tab if enableVcsColoring is set to false", ->
         repository.emitDidChangeStatus {path: tab.path, pathStatus: 'new'}
 
-        expect(tabBar.element.querySelectorAll('.tabs-Tab')[1].querySelector('.tabs-Tab-title')).toHaveClass "status-added"
+        expect(tabBar.element.querySelectorAll('.tabs-Tab')[1].querySelector('.tabs-Title')).toHaveClass "status-added"
         atom.config.set "tabs.enableVcsColoring", false
-        expect(tabBar.element.querySelectorAll('.tabs-Tab')[1].querySelector('.tabs-Tab-title')).not.toHaveClass "status-added"
+        expect(tabBar.element.querySelectorAll('.tabs-Tab')[1].querySelector('.tabs-Title')).not.toHaveClass "status-added"
 
       it "adds status to the tab if enableVcsColoring is set to true", ->
         atom.config.set "tabs.enableVcsColoring", false
         repository.getCachedPathStatus.andReturn 'modified'
-        expect(tabBar.element.querySelectorAll('.tabs-Tab')[1].querySelector('.tabs-Tab-title')).not.toHaveClass "status-modified"
+        expect(tabBar.element.querySelectorAll('.tabs-Tab')[1].querySelector('.tabs-Title')).not.toHaveClass "status-modified"
         atom.config.set "tabs.enableVcsColoring", true
 
         waitsFor ->
           repository.changeStatusCallbacks?.length > 0
 
         runs ->
-          expect(tabBar.element.querySelectorAll('.tabs-Tab')[1].querySelector('.tabs-Tab-title')).toHaveClass "status-modified"
+          expect(tabBar.element.querySelectorAll('.tabs-Tab')[1].querySelector('.tabs-Title')).toHaveClass "status-modified"
 
     if atom.workspace.getLeftDock?
       describe "a pane in the dock", ->

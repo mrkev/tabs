@@ -416,7 +416,7 @@ class TabBarView
       # Bail out early when receiving this event, because we have already
       # handled it in the mousedown handler.
       return
-    else if event.which is 1 and not event.target.classList.contains('tabs-Tab-closeIcon')
+    else if event.which is 1 and not event.target.classList.contains('tabs-CloseButton')
       @pane.activateItem(tab.item)
       @pane.activate() unless @pane.isDestroyed()
     else if event.which is 2

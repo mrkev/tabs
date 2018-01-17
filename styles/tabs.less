@@ -61,105 +61,104 @@
         box-shadow: 1px 0 0 var(--border);
       }
     }
+  }
 
+  
+  // Title ----------------------
 
-    // Title ----------------------
-
-    &-title {
-      display: block;
-      padding-left: var(--spacer-1);
-      padding-right: var(--spacer-1);
-      text-align: center;
-      overflow: hidden;
-      white-space: pre;
-      text-overflow: ellipsis;
-      
-      // When tab is pending
-      &.is-pending {
-        font-style: italic;
-      }
-
-      // When "Show Icons" is disabled in the settings
-      &.has-hiddenIcon {
-        &.icon:before {
-          display: none;
-        }
-      }
+  &-Title {
+    display: block;
+    padding-left: var(--spacer-1);
+    padding-right: var(--spacer-1);
+    text-align: center;
+    overflow: hidden;
+    white-space: pre;
+    text-overflow: ellipsis;
+    
+    // When tab is pending
+    &.is-pending {
+      font-style: italic;
     }
 
+    // When "Show Icons" is disabled in the settings
+    &.has-hiddenIcon {
+      &.icon:before {
+        display: none;
+      }
+    }
+  }
 
-    // Close icon ----------------------
 
-    &-closeIcon {
-      --size: calc(var(--bar-height) ~'-' var(--spacer-2));
+  // Close Button ----------------------
 
-      .octicon(x, 16px);
-      position: absolute;
-      z-index: 2;
-      top: var(--spacer-1);
-      right: var(--spacer-1);
-      width: var(--size);
-      height: var(--size);
-      line-height: var(--size);
-      text-align: center;
+  &-CloseButton {
+    --size: calc(var(--bar-height) ~'-' var(--spacer-2));
+
+    .octicon(x, 16px);
+    position: absolute;
+    z-index: 2;
+    top: var(--spacer-1);
+    right: var(--spacer-1);
+    width: var(--size);
+    height: var(--size);
+    line-height: var(--size);
+    text-align: center;
+    background-color: var(--bg);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    transform: scale(0);
+    transition: transform .08s;
+    cursor: default;
+    &:hover {
+      color: var(--state-fg);
+      background-color: var(--accent-bg);
+    }
+    &:active {
       background-color: var(--bg);
-      border-radius: var(--border-radius);
-      overflow: hidden;
-      transform: scale(0);
-      transition: transform .08s;
-      cursor: default;
+    }
+    &::before {
+      z-index: 1;
+      font-size: calc(var(--bar-height) ~'-' var(--spacer-3));
+      width: auto;
+      height: auto;
+      pointer-events: none;
+    }
+  }
+
+  &-Tab:hover .tabs-CloseButton {
+    transform: scale(1);
+    transition-duration: .16s;
+  }
+
+
+  // Modified icon ----------------------
+
+  &-Tab.is-modified {
+    &:hover .tabs-CloseButton {
+      color: var(--accent-fg);
       &:hover {
         color: var(--state-fg);
-        background-color: var(--accent-bg);
-      }
-      &:active {
-        background-color: var(--bg);
-      }
-      &::before {
-        z-index: 1;
-        font-size: calc(var(--bar-height) ~'-' var(--spacer-3));
-        width: auto;
-        height: auto;
-        pointer-events: none;
       }
     }
-
-    &:hover .tabs-Tab-closeIcon {
+    &:not(:hover) .tabs-CloseButton {
+      color: var(--accent-fg);
       transform: scale(1);
-      transition-duration: .16s;
-    }
-
-
-    // Modified icon ----------------------
-
-    &.is-modified {
-      &:hover .tabs-Tab-closeIcon {
-        color: var(--accent-fg);
-        &:hover {
-          color: var(--state-fg);
-        }
-      }
-      &:not(:hover) .tabs-Tab-closeIcon {
-        color: var(--accent-fg);
-        transform: scale(1);
-        &::before {
-          content: "\f052";
-        }
+      &::before {
+        content: "\f052";
       }
     }
+  }
 
 
-    // Drag and Drop ----------------------
+  // Drag and Drop ----------------------
 
-    &.is-dragging {
-      opacity: .5;
+  &-Tab.is-dragging {
+    opacity: .5;
 
-      .tabs-Tab-closeIcon,
-      &:before {
-        visibility: hidden;
-      }
+    .tabs-CloseButton,
+    &:before {
+      visibility: hidden;
     }
-  
   }
 
 
