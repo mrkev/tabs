@@ -18,9 +18,18 @@
     display: none;
   }
 
+  // Hide tabs bar when empty
   &:empty {
     display: none;
   }
+
+  // Hide tabs bar when the alwaysShowTabBar setting is off and there is only 1 tab
+  &.is-hidden {
+    display: none;
+  }
+
+
+  // Tab ----------------------------
 
   &-Tab {
     position: relative;
@@ -78,7 +87,6 @@
       }
     }
 
-    
 
     // Close icon ----------------------
 
@@ -121,6 +129,7 @@
       transition-duration: .16s;
     }
 
+
     // Modified icon ----------------------
 
     &.is-modified {
@@ -138,18 +147,23 @@
         }
       }
     }
-  }
 
-  /* Drag and Drop */
 
-  &-Tab.is-dragging {
-    opacity: .5;
+    // Drag and Drop ----------------------
 
-    .tabs-Tab-closeIcon,
-    &:before {
-      visibility: hidden;
+    &.is-dragging {
+      opacity: .5;
+
+      .tabs-Tab-closeIcon,
+      &:before {
+        visibility: hidden;
+      }
     }
+  
   }
+
+
+  // Placeholder ----------------------
 
   &-Placeholder {
     position: relative;
@@ -196,12 +210,6 @@
         border-color: transparent var(--accent-fg) transparent transparent;
       }
     }
-  }
-
-  // Hidden ----------------------------
-  // gets toggled by alwaysShowTabBar setting
-  &.is-hidden {
-    display: none;
   }
 
 }
