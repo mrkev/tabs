@@ -36,8 +36,8 @@ class TabView
     @setupTooltip()
 
     if @isItemPending()
-      @itemTitle.classList.add('temp')
-      @element.classList.add('pending-tab')
+      @itemTitle.classList.add('is-pending')
+      @element.classList.add('is-pending')
 
     @element.ondrag = (e) -> layout.drag e
     @element.ondragend = (e) -> layout.end e
@@ -235,8 +235,8 @@ class TabView
       @item.terminatePendingState()
 
   clearPending: ->
-    @itemTitle.classList.remove('temp')
-    @element.classList.remove('pending-tab')
+    @itemTitle.classList.remove('is-pending')
+    @element.classList.remove('is-pending')
 
   updateIconVisibility: ->
     if atom.config.get 'tabs.showIcons'

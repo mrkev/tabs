@@ -1205,15 +1205,15 @@ describe "TabBarView", ->
         pane.destroyItems()
 
       describe "when opening a new tab", ->
-        it "adds tab with class 'temp'", ->
+        it "adds tab with class 'is-pending'", ->
           editor1 = null
           waitsForPromise ->
             atom.workspace.open('sample.txt', pending: true).then (o) -> editor1 = o
 
           runs ->
             pane.activateItem(editor1)
-            expect(tabBar.element.querySelectorAll('.tabs-Tab .temp').length).toBe 1
-            expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Tab-title')).toHaveClass 'temp'
+            expect(tabBar.element.querySelectorAll('.tabs-Tab .is-pending').length).toBe 1
+            expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].querySelector('.tabs-Tab-title')).toHaveClass 'is-pending'
 
       describe "when tabs:keep-pending-tab is triggered on the pane", ->
         it "terminates pending state on the tab's item", ->
@@ -1227,8 +1227,8 @@ describe "TabBarView", ->
             atom.commands.dispatch(atom.workspace.getActivePane().getElement(), 'tabs:keep-pending-tab')
             expect(isPending(editor1)).toBe false
 
-      describe "when there is a temp tab already", ->
-        it "it will replace an existing temporary tab", ->
+      describe "when there is a pending tab already", ->
+        it "it will replace an existing pending tab", ->
           editor1 = null
           editor2 = null
 
@@ -1241,7 +1241,7 @@ describe "TabBarView", ->
           runs ->
             expect(editor1.isDestroyed()).toBe true
             expect(tabBar.tabForItem(editor1)).toBeUndefined()
-            expect(tabBar.tabForItem(editor2).element.querySelector('.tabs-Tab-title')).toHaveClass 'temp'
+            expect(tabBar.tabForItem(editor2).element.querySelector('.tabs-Tab-title')).toHaveClass 'is-pending'
 
         it "makes the tab permanent when double-clicking the tab", ->
           editor2 = null
@@ -1251,9 +1251,9 @@ describe "TabBarView", ->
 
           runs ->
             pane.activateItem(editor2)
-            expect(tabBar.tabForItem(editor2).element.querySelector('.tabs-Tab-title')).toHaveClass 'temp'
+            expect(tabBar.tabForItem(editor2).element.querySelector('.tabs-Tab-title')).toHaveClass 'is-pending'
             triggerMouseEvent('dblclick', tabBar.tabForItem(editor2).element, which: 1)
-            expect(tabBar.tabForItem(editor2).element.querySelector('.tabs-Tab-title')).not.toHaveClass 'temp'
+            expect(tabBar.tabForItem(editor2).element.querySelector('.tabs-Tab-title')).not.toHaveClass 'is-pending'
 
       describe "when editing a file in pending state", ->
         it "makes the item and tab permanent", ->
@@ -1266,7 +1266,7 @@ describe "TabBarView", ->
               advanceClock(editor1.buffer.stoppedChangingDelay)
 
           runs ->
-            expect(tabBar.tabForItem(editor1).element.querySelector('.tabs-Tab-title')).not.toHaveClass 'temp'
+            expect(tabBar.tabForItem(editor1).element.querySelector('.tabs-Tab-title')).not.toHaveClass 'is-pending'
 
       describe "when saving a file", ->
         it "makes the tab permanent", ->
@@ -1278,7 +1278,7 @@ describe "TabBarView", ->
               editor1.save()
 
           runs ->
-            expect(tabBar.tabForItem(editor1).element.querySelector('.tabs-Tab-title')).not.toHaveClass 'temp'
+            expect(tabBar.tabForItem(editor1).element.querySelector('.tabs-Tab-title')).not.toHaveClass 'is-pending'
 
       describe "when splitting a pending tab", ->
         editor1 = null
@@ -1292,11 +1292,11 @@ describe "TabBarView", ->
           tabBar2 = new TabBarView(pane2, 'center')
           newEditor = pane2.getActiveItem()
           expect(isPending(newEditor)).toBe false
-          expect(tabBar2.tabForItem(newEditor).element.querySelector('.tabs-Tab-title')).not.toHaveClass 'temp'
+          expect(tabBar2.tabForItem(newEditor).element.querySelector('.tabs-Tab-title')).not.toHaveClass 'is-pending'
 
         it "keeps the pending tab in the old pane", ->
           expect(isPending(editor1)).toBe true
-          expect(tabBar.tabForItem(editor1).element.querySelector('.tabs-Tab-title')).toHaveClass 'temp'
+          expect(tabBar.tabForItem(editor1).element.querySelector('.tabs-Tab-title')).toHaveClass 'is-pending'
 
       describe "when dragging a pending tab to a different pane", ->
         it "makes the tab permanent in the other pane", ->
@@ -1311,7 +1311,7 @@ describe "TabBarView", ->
             tabBar2 = new TabBarView(pane2, 'center')
             tabBar2.moveItemBetweenPanes(pane, 0, pane2, 1, editor1)
 
-            expect(tabBar2.tabForItem(pane2.getActiveItem()).element.querySelector('.tabs-Tab-title')).not.toHaveClass 'temp'
+            expect(tabBar2.tabForItem(pane2.getActiveItem()).element.querySelector('.tabs-Tab-title')).not.toHaveClass 'is-pending'
 
   describe "integration with version control systems", ->
     [repository, tab, tab1] = []
