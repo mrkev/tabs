@@ -309,11 +309,11 @@ class TabBarView
 
     if newDropTargetIndex < tabs.length
       tab = tabs[newDropTargetIndex]
-      tab.element.classList.add 'is-drop-target'
+      tab.element.classList.add 'is-dropTarget'
       tab.element.parentElement.insertBefore(placeholder, tab.element)
     else
       if tab = tabs[newDropTargetIndex - 1]
-        tab.element.classList.add 'drop-target-is-after'
+        tab.element.classList.add 'is-dropTargetIsAfter'
         if sibling = tab.element.nextSibling
           tab.element.parentElement.insertBefore(placeholder, sibling)
         else
@@ -464,11 +464,11 @@ class TabBarView
 
   removeDropTargetClasses: ->
     workspaceElement = atom.workspace.getElement()
-    for dropTarget in workspaceElement.querySelectorAll('.tab-bar .is-drop-target')
-      dropTarget.classList.remove('is-drop-target')
+    for dropTarget in workspaceElement.querySelectorAll('.tabs .is-dropTarget')
+      dropTarget.classList.remove('is-dropTarget')
 
-    for dropTarget in workspaceElement.querySelectorAll('.tab-bar .drop-target-is-after')
-      dropTarget.classList.remove('drop-target-is-after')
+    for dropTarget in workspaceElement.querySelectorAll('.tabs .is-dropTargetIsAfter')
+      dropTarget.classList.remove('is-dropTargetIsAfter')
 
   getDropTargetIndex: (event) ->
     target = event.target
