@@ -34,12 +34,6 @@
     transition: max-width .25s ease-in-out;
     -webkit-user-drag: element;
 
-    &.active {
-      color: var(--fg-strong);
-      background-color: var(--bg);
-      box-shadow: none;
-    }
-
     &:first-of-type {
       border-left-color: transparent;
     }
@@ -47,8 +41,16 @@
       // use box-shadow to not take up any space
       box-shadow: inset 0 -1px 0 var(--border), 1px 0 0 var(--border);
     }
-    &.active:last-of-type {
-      box-shadow: 1px 0 0 var(--border);
+
+    // Active tab
+    &.is-active {
+      color: var(--fg-strong);
+      background-color: var(--bg);
+      box-shadow: none;
+
+      &:last-of-type {
+        box-shadow: 1px 0 0 var(--border);
+      }
     }
 
 

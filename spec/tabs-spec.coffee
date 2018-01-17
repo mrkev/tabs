@@ -154,7 +154,7 @@ describe "TabBarView", ->
       expect(tabBar.element.querySelectorAll('.tabs-Tab')[0].dataset.type).toBe('TestView')
 
     it "highlights the tab for the active pane item", ->
-      expect(tabBar.element.querySelectorAll('.tabs-Tab')[2]).toHaveClass 'active'
+      expect(tabBar.element.querySelectorAll('.tabs-Tab')[2]).toHaveClass 'is-active'
 
     it "emits a warning when ::onDid... functions are not valid Disposables", ->
       class BadView
@@ -192,12 +192,12 @@ describe "TabBarView", ->
   describe "when the active pane item changes", ->
     it "highlights the tab for the new active pane item", ->
       pane.activateItem(item1)
-      expect(tabBar.element.querySelectorAll('.active').length).toBe 1
-      expect(tabBar.element.querySelectorAll('.tabs-Tab')[0]).toHaveClass 'active'
+      expect(tabBar.element.querySelectorAll('.is-active').length).toBe 1
+      expect(tabBar.element.querySelectorAll('.tabs-Tab')[0]).toHaveClass 'is-active'
 
       pane.activateItem(item2)
-      expect(tabBar.element.querySelectorAll('.active').length).toBe 1
-      expect(tabBar.element.querySelectorAll('.tabs-Tab')[2]).toHaveClass 'active'
+      expect(tabBar.element.querySelectorAll('.is-active').length).toBe 1
+      expect(tabBar.element.querySelectorAll('.tabs-Tab')[2]).toHaveClass 'is-active'
 
   describe "when a new item is added to the pane", ->
     it "adds the 'is-modified' class to the new tab if the item is initially modified", ->

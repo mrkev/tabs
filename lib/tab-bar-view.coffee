@@ -162,9 +162,9 @@ class TabBarView
 
   setActiveTab: (tabView) ->
     if tabView? and tabView isnt @activeTab
-      @activeTab?.element.classList.remove('active')
+      @activeTab?.element.classList.remove('is-active')
       @activeTab = tabView
-      @activeTab.element.classList.add('active')
+      @activeTab.element.classList.add('is-active')
       @activeTab.element.scrollIntoView(false)
 
   getActiveTab: ->
