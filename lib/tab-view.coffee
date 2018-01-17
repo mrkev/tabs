@@ -246,10 +246,10 @@ class TabView
 
   updateModifiedStatus: ->
     if @item.isModified?()
-      @element.classList.add('modified') unless @isModified
+      @element.classList.add('is-modified') unless @isModified
       @isModified = true
     else
-      @element.classList.remove('modified') if @isModified
+      @element.classList.remove('is-modified') if @isModified
       @isModified = false
 
   setupVcsStatus: ->

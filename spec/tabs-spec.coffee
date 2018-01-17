@@ -200,7 +200,7 @@ describe "TabBarView", ->
       expect(tabBar.element.querySelectorAll('.tabs-Tab')[2]).toHaveClass 'active'
 
   describe "when a new item is added to the pane", ->
-    it "adds the 'modified' class to the new tab if the item is initially modified", ->
+    it "adds the 'is-modified' class to the new tab if the item is initially modified", ->
       editor2 = null
 
       waitsForPromise ->
@@ -212,7 +212,7 @@ describe "TabBarView", ->
       runs ->
         editor2.insertText('x')
         pane.activateItem(editor2)
-        expect(tabBar.tabForItem(editor2).element).toHaveClass 'modified'
+        expect(tabBar.tabForItem(editor2).element).toHaveClass 'is-modified'
 
     describe "when addNewTabsAtEnd is set to true in package settings", ->
       it "adds a tab for the new item at the end of the tab bar", ->
@@ -497,20 +497,20 @@ describe "TabBarView", ->
       expect(tabBar.element.querySelectorAll('.tabs-Tab')[2].querySelector('.tabs-Tab-title')).toHaveClass "icon-squirrel"
 
   describe "when a tab item's modified status changes", ->
-    it "adds or removes the 'modified' class to the tab based on the status", ->
+    it "adds or removes the 'is-modified' class to the tab based on the status", ->
       tab = tabBar.tabForItem(editor1)
       expect(editor1.isModified()).toBeFalsy()
-      expect(tab.element).not.toHaveClass 'modified'
+      expect(tab.element).not.toHaveClass 'is-modified'
 
       editor1.insertText('x')
       advanceClock(editor1.buffer.stoppedChangingDelay)
       expect(editor1.isModified()).toBeTruthy()
-      expect(tab.element).toHaveClass 'modified'
+      expect(tab.element).toHaveClass 'is-modified'
 
       editor1.undo()
       advanceClock(editor1.buffer.stoppedChangingDelay)
       expect(editor1.isModified()).toBeFalsy()
-      expect(tab.element).not.toHaveClass 'modified'
+      expect(tab.element).not.toHaveClass 'is-modified'
 
   describe "when a pane item moves to a new index", ->
     # behavior is independent of addNewTabs config
