@@ -16,12 +16,12 @@ class TabView
     if ['TextEditor', 'TestView'].indexOf(@item.constructor.name) > -1
       @element.classList.add('texteditor')
 
-    @itemTitle = document.createElement('span')
+    @itemTitle = document.createElement('div')
     @itemTitle.classList.add('tabs-Tab-title')
     @element.appendChild(@itemTitle)
 
     if location is 'center' or not @item.isPermanentDockItem?()
-      closeIcon = document.createElement('span')
+      closeIcon = document.createElement('div')
       closeIcon.classList.add('tabs-Tab-closeIcon')
       closeIcon.onclick = didClickCloseIcon
       @element.appendChild(closeIcon)
