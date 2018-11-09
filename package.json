@@ -2,9 +2,9 @@
   "name": "tabs",
   "version": "0.109.2",
   "main": "./lib/main",
-  "description": "Display a selectable tab for each editor open.",
+  "description": "A slight improvment on the core tabs package.",
   "license": "MIT",
-  "repository": "https://github.com/atom/tabs",
+  "repository": "https://github.com/mrkev/tabs",
   "engines": {
     "atom": "*"
   },
